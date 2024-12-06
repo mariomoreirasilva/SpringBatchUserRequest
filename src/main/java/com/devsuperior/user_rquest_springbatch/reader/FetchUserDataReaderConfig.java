@@ -1,5 +1,6 @@
 package com.devsuperior.user_rquest_springbatch.reader;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import org.springframework.batch.core.annotation.BeforeChunk;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
-import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -69,15 +69,23 @@ public class FetchUserDataReaderConfig implements ItemReader<UserDTO> {
 		logger.info("[READER STEP] Request da URI: " + String.format(uri, getPage(), pageSize));
 		
 		//chamada da api usando o restTamplate
+		/*
 		ResponseEntity<ResponseUser> response = restTemplete.exchange(String.format(uri, getPage(), pageSize), HttpMethod.GET, null,new ParameterizedTypeReference<ResponseUser>() {
 			
 										});
 		List<UserDTO> result = response.getBody().getContent();
 		return result;
+		*/
+		
+		ResponseEntity<ResponseUser> response = restTemplete.exchange(String.format(uri, getPage(), pageSize), HttpMethod.GET, null,new ParameterizedTypeReference<ResponseUser>() {
+										});
+
+		List<UserDTO> result = response.getBody().getContent();
+			return result;		
 	}
 	
 	public int getPage() {
-		return page;
+		return this.page;
 	}
 	
 	public void incrementaPage() {
