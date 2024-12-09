@@ -57,7 +57,7 @@ public class FetchUserDataReaderConfig implements ItemReader<UserDTO> {
 			user = null;
 		
 		userIndex ++;
-		return null;
+		return user;
 	}
 	
 	//criar um metodo que conecta na api remota
