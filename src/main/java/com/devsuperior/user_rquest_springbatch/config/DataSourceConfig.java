@@ -16,7 +16,7 @@ public class DataSourceConfig {
 	
 	@Primary
 	@Bean
-	@ConfigurationProperties(prefix = "spirng.datasource")
+	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource springBatchDB() {
 		
 		return DataSourceBuilder.create().build();
